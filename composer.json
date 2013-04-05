@@ -5,6 +5,6 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/http-foundation": "2.1.*@dev"
+        "symfony/http-foundation": "2.2.*"
     }
 }
