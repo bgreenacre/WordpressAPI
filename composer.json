@@ -1,5 +1,5 @@
 {
-    "bgreenacre/wordpress-api",
+    "name": "bgreenacre/wordpress-api",
     "autoload": {
         "psr-0": {"Wordpress\\Api": "src/"}
     },
