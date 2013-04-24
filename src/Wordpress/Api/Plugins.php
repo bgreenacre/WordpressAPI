@@ -29,14 +29,15 @@ class Plugins {
 
     public function getNew($page = 1)
     {
-        $data = $this->_request->reset()
+        return $this->_request
+            ->reset()
             ->setUrl('http://api.wordpress.org/plugins/info/1.0/')
             ->setMethod('post')
             ->setPost(
                 array(
-                    'action' => 'query_plugins',
-                    'body'   => array(
-                        'browse' => 'popular',
+                    'action'  => 'query_plugins',
+                    'request' => (object) array(
+                        'browse' => 'new',
                         'page'   => $page,
                     )
                 )

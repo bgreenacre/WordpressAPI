@@ -9,14 +9,26 @@ class Request {
     protected $_action;
     protected $_response;
 
+    public function reset()
+    {
+        $this->_query    = array();
+        $this->_post     = array();
+        $this->_method   = 'post';
+        $this->_url      = '';
+        $this->_action   = '';
+        $this->_response = '';
+
+        return $this;
+    }
+
     public function request()
     {
         $url = $this->getAbsoluteUrl();
 
-        $ch = curl_init($url);
+        $ch = curl_init();
 
+        $options[CURLOPT_URL] = $url;
         $options[CURLOPT_RETURNTRANSFER] = true;
-        $options[CURLOPT_HEADER] = false;
 
         if ($this->getMethod() == 'post')
         {
@@ -25,7 +37,7 @@ class Request {
 
         if ($post = $this->getPost())
         {
-            $post['body'] = serialize($post['body']);
+            $post['request'] = serialize($post['request']);
             
             $options[CURLOPT_POSTFIELDS] = $post;
         }
@@ -35,15 +47,15 @@ class Request {
         $body = curl_exec($ch);
 
         // Get the response information
-        $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         if ($body === FALSE)
         {
-            $error = curl_error($curl);
+            $error = curl_error($ch);
         }
 
         // Close the connection
-        curl_close($curl);
+        curl_close($ch);
 
         if (isset($error))
         {
@@ -68,7 +80,7 @@ class Request {
 
         $body = $this->getResponse();
 
-        return ($body) ? json_decode($body, true) : null;
+        return ($body) ? unserialize($body) : null;
     }
 
     public function getResponse()
@@ -93,7 +105,7 @@ class Request {
     public function getAbsoluteUrl()
     {
         $url = $this->getUrl();
-        $url .= rtrim($url, '/') . $this->getAction();
+        $url = rtrim($url, '/') . '/' . $this->getAction();
 
         if ($query = $this->getQuery())
         {
