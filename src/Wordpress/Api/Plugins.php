@@ -27,6 +27,23 @@ class Plugins {
         $this->setRequest($request);
     }
 
+    public function getPlugin($slug)
+    {
+        return $this->_request
+            ->reset()
+            ->setUrl('http://api.wordpress.org/plugins/info/1.0/')
+            ->setMethod('post')
+            ->setPost(
+                array(
+                    'action'  => 'plugin_information',
+                    'request' => (object) array(
+                        'slug' => $slug,
+                    )
+                )
+            )
+            ->run();
+    }
+
     public function getNew($page = 1)
     {
         return $this->_request
