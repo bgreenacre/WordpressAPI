@@ -29,6 +29,9 @@ class Request {
 
         $options[CURLOPT_URL] = $url;
         $options[CURLOPT_RETURNTRANSFER] = true;
+        $options[CURLOPT_HTTPHEADER] = array(
+            'user-agent' => 'Wordpress/3.5.1; http://wordpress.org/',
+        );
 
         if ($this->getMethod() == 'post')
         {
