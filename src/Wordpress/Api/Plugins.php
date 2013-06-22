@@ -51,6 +51,14 @@ class Plugins {
         $url = sprintf('https://wordpress.org/extend/plugins/%s/developers/', $slug);
         $client = new Client();
 
+        $client->getClient()->setConfig(
+            array(
+                'curl.options' => array(
+                    CURLOPT_TIMEOUT => 60,
+                )
+            )
+        );
+
         $page = $client->request('GET', $url);
         $versionsFiltered = $page->filter('a')->each(function($node, $i) use ($slug)
         {
@@ -85,7 +93,7 @@ class Plugins {
         return $versions;
     }
 
-    public function getNew($page = 1)
+    public function getNew($page = 1, $perPage = 50)
     {
         return $this->_request
             ->reset()
@@ -97,6 +105,7 @@ class Plugins {
                     'request' => (object) array(
                         'browse' => 'new',
                         'page'   => $page,
+                        'per_page' => (int) $perPage,
                     )
                 )
             )

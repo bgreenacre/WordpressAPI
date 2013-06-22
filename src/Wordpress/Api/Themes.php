@@ -65,7 +65,16 @@ class Themes {
         $url = sprintf('https://wordpress.org/extend/themes/%s/developers/', $slug);
         $client = new Client();
 
+        $client->getClient()->setConfig(
+            array(
+                'curl.options' => array(
+                    CURLOPT_TIMEOUT => 60,
+                )
+            )
+        );
+
         $page = $client->request('GET', $url);
+
         $versionsFiltered = $page->filter('a')->each(function($node, $i) use ($slug)
         {
             preg_match(
@@ -99,7 +108,7 @@ class Themes {
         return $versions;
     }
 
-    public function getNew($page = 1)
+    public function getNew($page = 1, $perPage = 50)
     {
         return $this->_request
             ->reset()
@@ -110,7 +119,7 @@ class Themes {
                     'action'  => 'query_themes',
                     'request' => (object) array(
                         'page'     => $page,
-                        'per_page' => 50,
+                        'per_page' => (int) $perPage,
                         'fields'   => null,
                         'search'   => '',
                     )
