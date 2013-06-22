@@ -4,6 +4,7 @@
         "psr-0": {"Wordpress\\Api": "src/"}
     },
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "guzzle/guzzle": ">=3.0,<=3.7"
     }
 }
