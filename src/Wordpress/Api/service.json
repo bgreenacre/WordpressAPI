@@ -1,0 +1,122 @@
+{
+    "name": "Wordpress Api Client",
+    "version": "0.1.0",
+    "operations": {
+        "GetNewThemes": {
+            "httpMethod": "POST",
+            "uri": "/themes/info/1.0/",
+            "summary": "Get theme meta data.",
+            "responseClass": "\\Wordpress\\Api\\Response",
+            "parameters": {
+                "action": {
+                    "location": "postField",
+                    "type": "string",
+                    "required": true,
+                    "default": "query_themes",
+                    "static": true
+                },
+                "request": {
+                    "location": "postField",
+                    "type": ["string", "object"],
+                    "required": true,
+                    "filters": ["serialize"]
+                }
+            }
+        },
+        "GetTheme": {
+            "httpMethod": "POST",
+            "uri": "/themes/info/1.0/",
+            "summary": "Get theme meta data.",
+            "responseClass": "\\Wordpress\\Api\\Response",
+            "parameters": {
+                "action": {
+                    "location": "postField",
+                    "type": "string",
+                    "required": true,
+                    "default": "theme_information",
+                    "static": true
+                },
+                "request": {
+                    "location": "postField",
+                    "type": ["string", "object"],
+                    "required": true,
+                    "filters": ["serialize"]
+                }
+            }
+        },
+        "GetThemeVersions": {
+            "httpMethod": "GET",
+            "class": "\\Wordpress\\Api\\Command\\VersionsCommand",
+            "parameters": {
+                "slug": {
+                    "type": "string",
+                    "required": true
+                },
+                "package": {
+                    "type": "string",
+                    "required": true,
+                    "default": "themes",
+                    "static": true
+                }
+            }
+        },
+        "GetNewPlugins": {
+            "httpMethod": "POST",
+            "uri": "/plugins/info/1.0/",
+            "summary": "Get plugin meta data.",
+            "responseClass": "\\Wordpress\\Api\\Response",
+            "parameters": {
+                "action": {
+                    "location": "postField",
+                    "type": "string",
+                    "required": true,
+                    "default": "query_plugins",
+                    "static": true
+                },
+                "request": {
+                    "location": "postField",
+                    "type": ["string", "object"],
+                    "required": true,
+                    "filters": ["serialize"]
+                }
+            }
+        },
+        "GetPlugin": {
+            "httpMethod": "POST",
+            "uri": "/plugins/info/1.0/",
+            "summary": "Get plugin meta data.",
+            "responseClass": "\\Wordpress\\Api\\Response",
+            "parameters": {
+                "action": {
+                    "location": "postField",
+                    "type": "string",
+                    "required": true,
+                    "default": "plugin_information",
+                    "static": true
+                },
+                "request": {
+                    "location": "postField",
+                    "type": ["string", "object"],
+                    "required": true,
+                    "filters": ["serialize"]
+                }
+            }
+        },
+        "GetPluginVersions": {
+            "httpMethod": "GET",
+            "class": "\\Wordpress\\Api\\Command\\VersionsCommand",
+            "parameters": {
+                "slug": {
+                    "type": "string",
+                    "required": true
+                },
+                "package": {
+                    "type": "string",
+                    "required": true,
+                    "default": "plugins",
+                    "static": true
+                }
+            }
+        }
+    }
+}
