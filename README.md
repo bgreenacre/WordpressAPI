@@ -6,26 +6,26 @@ This is a guzzle client written to interact with the [https://codex.wordpress.or
 
 $client = \Wordpress\Api\WordpressClient::factory();
 
-// Get new plugins.
+    // Get new plugins.
 
-$plugins = $client->getIterator('GetNewPlugins');
+    $plugins = $client->getIterator('GetNewPlugins');
 
-foreach ($plugins as $plugin)
-{
-    var_dump($plugin);
-}
+    foreach ($plugins as $plugin)
+    {
+        var_dump($plugin);
+    }
 
-// Get a plugin
+    // Get a plugin
 
-$plugin = $client->getCommand(
-    'GetPlugin',
-    array(
-        'request' => array(
-            'slug' => 'akismet',
+    $plugin = $client->getCommand(
+        'GetPlugin',
+        array(
+            'request' => array(
+                'slug' => 'akismet',
+            )
         )
-    )
-)->execute();
+    )->execute();
 
-var_dump($plugin);
+    var_dump($plugin);
 
 _See src/Wordpress/Api/services.json for all available operations_
