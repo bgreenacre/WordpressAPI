@@ -4,6 +4,11 @@ use Guzzle\Service\Command\OperationCommand;
 
 class VersionsCommand extends OperationCommand {
 
+    /**
+     * Builds the url and creates request object.
+     * 
+     * @return void
+     */
     public function build()
     {
         $this->client->setBaseUrl('http://wordpress.org');
@@ -18,17 +23,26 @@ class VersionsCommand extends OperationCommand {
             );
     }
 
+    /**
+     * Process the response. Find all the version urls
+     * and build a nice array containing versions and
+     * url's to where the zip can be downloaded.
+     * 
+     * @return void
+     */
     public function process()
     {
         $versions = array();
         $body = (string) $this->request->getResponse()->getBody();
 
+        // Find all url's containing zip files.
         preg_match_all(
             '#\<a(?:.*?)href=(?:\'|")+(.*?' . preg_quote($this['slug']) . '\.?([0-9\.]+)?\.zip)(?:\'|")+.*?\>#i',
             $body,
             $matches
         );
 
+        // Build an array of found versions
         if (isset($matches[1]))
         {
             foreach ($matches[1] as $key => $url)
