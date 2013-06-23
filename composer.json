@@ -1,5 +1,13 @@
 {
     "name": "bgreenacre/wordpress-api",
+    "description": "A guzzle client for the wordpress plugin/theme API.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Brian Greenacre",
+            "email": "bgreenacre42@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-0": {"Wordpress\\Api": "src/"}
     },
