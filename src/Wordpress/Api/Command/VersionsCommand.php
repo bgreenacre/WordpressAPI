@@ -61,10 +61,20 @@ class VersionsCommand extends OperationCommand {
         {
             // Find all url's containing zip files.
             preg_match_all(
-                '#\<a(?:.*?)href=(?:\'|")+(.*?wordpress\-(.*?)\.zip)(?:\'|")+.*?\>#i',
+                '#\<a([^\>]+)\>zip</a>#i',
                 $body,
                 $matches
             );
+
+            foreach ($matches[1] as $url)
+            {
+                preg_match('/.*?href=(?:\'|"){1}(.*?wordpress-(.*?)\.zip)(?:\'|"){1}/', $url, $match);
+
+                $versions[] = array(
+                    'version' => $match[2],
+                    'url'     => $match[1],
+                );
+            }
         }
         else
         {
@@ -74,22 +84,23 @@ class VersionsCommand extends OperationCommand {
                 $body,
                 $matches
             );
-        }
 
-        // Build an array of found versions
-        if (isset($matches[1]))
-        {
-            foreach ($matches[1] as $key => $url)
+
+            // Build an array of found versions
+            if (isset($matches[1]))
             {
-                if (empty($matches[2][$key]))
+                foreach ($matches[1] as $key => $url)
                 {
-                    continue;
-                }
+                    if (empty($matches[2][$key]))
+                    {
+                        continue;
+                    }
 
-                $versions[] = array(
-                    'version' => $matches[2][$key],
-                    'url'     => $url,
-                );
+                    $versions[] = array(
+                        'version' => $matches[2][$key],
+                        'url'     => $url,
+                    );
+                }
             }
         }
 
