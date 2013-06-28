@@ -2,10 +2,11 @@
     "name": "Wordpress Api Client",
     "version": "0.1.0",
     "operations": {
-        "GetNewThemes": {
+        "GetPopularThemes": {
             "httpMethod": "POST",
             "uri": "/themes/info/1.0/",
             "summary": "Get theme meta data.",
+            "class": "\\Wordpress\\Api\\Command",
             "responseClass": "\\Wordpress\\Api\\Response",
             "parameters": {
                 "action": {
@@ -15,11 +16,101 @@
                     "default": "query_themes",
                     "static": true
                 },
-                "request": {
-                    "location": "postField",
-                    "type": ["string", "object"],
+                "browse": {
+                    "type": "string",
                     "required": true,
-                    "filters": ["serialize"]
+                    "default": "popular",
+                    "static": true
+                },
+                "search": {
+                    "type": "string",
+                    "required": false
+                },
+                "tag": {
+                    "type": "string",
+                    "required": false
+                },
+                "author": {
+                    "type": "string",
+                    "required": false
+                },
+                "page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 20
+                },
+                "fields": {
+                    "type": "array",
+                    "required": false,
+                    "default": {
+                        "downloaded": true,
+                        "author": true,
+                        "author_profile": false,
+                        "contributors": false,
+                        "requires": true,
+                        "tested": true,
+                        "compatibility": true,
+                        "homepage": false,
+                        "description": true,
+                        "last_updated": true,
+                        "added": true,
+                        "sections": false
+                    }
+                }
+            }
+        },
+        "GetNewThemes": {
+            "httpMethod": "POST",
+            "uri": "/themes/info/1.0/",
+            "summary": "Get theme meta data.",
+            "class": "\\Wordpress\\Api\\Command",
+            "responseClass": "\\Wordpress\\Api\\Response",
+            "parameters": {
+                "action": {
+                    "location": "postField",
+                    "type": "string",
+                    "required": true,
+                    "default": "query_themes",
+                    "static": true
+                },
+                "browse": {
+                    "type": "string",
+                    "required": true,
+                    "default": "new",
+                    "static": true
+                },
+                "page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 20
+                },
+                "fields": {
+                    "type": "array",
+                    "required": false,
+                    "default": {
+                        "downloaded": true,
+                        "author": true,
+                        "author_profile": false,
+                        "contributors": false,
+                        "requires": true,
+                        "tested": true,
+                        "compatibility": true,
+                        "homepage": false,
+                        "description": true,
+                        "last_updated": true,
+                        "added": true,
+                        "sections": false
+                    }
                 }
             }
         },
@@ -27,20 +118,61 @@
             "httpMethod": "POST",
             "uri": "/themes/info/1.0/",
             "summary": "Get theme meta data.",
+            "class": "\\Wordpress\\Api\\Command",
             "responseClass": "\\Wordpress\\Api\\Response",
             "parameters": {
                 "action": {
                     "location": "postField",
                     "type": "string",
                     "required": true,
-                    "default": "theme_information",
+                    "default": "query_themes",
                     "static": true
                 },
-                "request": {
-                    "location": "postField",
-                    "type": ["string", "object"],
+                "browse": {
+                    "type": "string",
                     "required": true,
-                    "filters": ["serialize"]
+                    "default": "new",
+                    "static": true
+                },
+                "search": {
+                    "type": "string",
+                    "required": false
+                },
+                "tag": {
+                    "type": "string",
+                    "required": false
+                },
+                "author": {
+                    "type": "string",
+                    "required": false
+                },
+                "page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 20
+                },
+                "fields": {
+                    "type": "array",
+                    "required": false,
+                    "default": {
+                        "downloaded": true,
+                        "author": true,
+                        "author_profile": false,
+                        "contributors": false,
+                        "requires": true,
+                        "tested": true,
+                        "compatibility": true,
+                        "homepage": false,
+                        "description": true,
+                        "last_updated": true,
+                        "added": true,
+                        "sections": false
+                    }
                 }
             }
         },
@@ -60,10 +192,67 @@
                 }
             }
         },
-        "GetNewPlugins": {
+        "SearchThemes": {
+            "httpMethod": "POST",
+            "uri": "/themes/info/1.0/",
+            "summary": "Get theme meta data.",
+            "class": "\\Wordpress\\Api\\Command",
+            "responseClass": "\\Wordpress\\Api\\Response",
+            "parameters": {
+                "action": {
+                    "location": "postField",
+                    "type": "string",
+                    "required": true,
+                    "default": "query_themes",
+                    "static": true
+                },
+                "search": {
+                    "type": "string",
+                    "required": true
+                },
+                "tag": {
+                    "type": "string",
+                    "required": false
+                },
+                "author": {
+                    "type": "string",
+                    "required": false
+                },
+                "page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 20
+                },
+                "fields": {
+                    "type": "array",
+                    "required": false,
+                    "default": {
+                        "downloaded": true,
+                        "author": true,
+                        "author_profile": false,
+                        "contributors": false,
+                        "requires": true,
+                        "tested": true,
+                        "compatibility": true,
+                        "homepage": false,
+                        "description": true,
+                        "last_updated": true,
+                        "added": true,
+                        "sections": false
+                    }
+                }
+            }
+        },
+        "GetPopularPlugins": {
             "httpMethod": "POST",
             "uri": "/plugins/info/1.0/",
             "summary": "Get plugin meta data.",
+            "class": "\\Wordpress\\Api\\Command",
             "responseClass": "\\Wordpress\\Api\\Response",
             "parameters": {
                 "action": {
@@ -73,11 +262,165 @@
                     "default": "query_plugins",
                     "static": true
                 },
-                "request": {
-                    "location": "postField",
-                    "type": ["string", "object"],
+                "browse": {
+                    "type": "string",
                     "required": true,
-                    "filters": ["serialize"]
+                    "default": "popular",
+                    "static": true
+                },
+                "search": {
+                    "type": "string",
+                    "required": false
+                },
+                "tag": {
+                    "type": "string",
+                    "required": false
+                },
+                "author": {
+                    "type": "string",
+                    "required": false
+                },
+                "page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 20
+                },
+                "fields": {
+                    "type": "array",
+                    "required": false,
+                    "default": {
+                        "downloaded": true,
+                        "author": true,
+                        "author_profile": false,
+                        "contributors": false,
+                        "requires": true,
+                        "tested": true,
+                        "compatibility": true,
+                        "homepage": false,
+                        "description": true,
+                        "last_updated": true,
+                        "added": true,
+                        "sections": false
+                    }
+                }
+            }
+        },
+        "GetPluginsByTag": {
+            "httpMethod": "POST",
+            "uri": "/plugins/info/1.0/",
+            "summary": "Get plugin meta data.",
+            "class": "\\Wordpress\\Api\\Command",
+            "responseClass": "\\Wordpress\\Api\\Response",
+            "parameters": {
+                "action": {
+                    "location": "postField",
+                    "type": "string",
+                    "required": true,
+                    "default": "query_plugins",
+                    "static": true
+                },
+                "tag": {
+                    "type": "string",
+                    "required": true
+                },
+                "author": {
+                    "type": "string",
+                    "required": false
+                },
+                "page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 20
+                },
+                "fields": {
+                    "type": "array",
+                    "required": false,
+                    "default": {
+                        "downloaded": true,
+                        "author": true,
+                        "author_profile": false,
+                        "contributors": false,
+                        "requires": true,
+                        "tested": true,
+                        "compatibility": true,
+                        "homepage": false,
+                        "description": true,
+                        "last_updated": true,
+                        "added": true,
+                        "sections": false
+                    }
+                }
+            }
+        },
+        "GetNewPlugins": {
+            "httpMethod": "POST",
+            "uri": "/plugins/info/1.0/",
+            "summary": "Get plugin meta data.",
+            "class": "\\Wordpress\\Api\\Command",
+            "responseClass": "\\Wordpress\\Api\\Response",
+            "parameters": {
+                "action": {
+                    "location": "postField",
+                    "type": "string",
+                    "required": true,
+                    "default": "query_plugins",
+                    "static": true
+                },
+                "browse": {
+                    "type": "string",
+                    "required": true,
+                    "default": "new",
+                    "static": true
+                },
+                "search": {
+                    "type": "string",
+                    "required": false
+                },
+                "tag": {
+                    "type": "string",
+                    "required": false
+                },
+                "author": {
+                    "type": "string",
+                    "required": false
+                },
+                "page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 20
+                },
+                "fields": {
+                    "type": "array",
+                    "required": false,
+                    "default": {
+                        "downloaded": true,
+                        "author": true,
+                        "author_profile": false,
+                        "contributors": false,
+                        "requires": true,
+                        "tested": true,
+                        "compatibility": true,
+                        "homepage": false,
+                        "description": true,
+                        "last_updated": true,
+                        "added": true,
+                        "sections": false
+                    }
                 }
             }
         },
@@ -85,20 +428,61 @@
             "httpMethod": "POST",
             "uri": "/plugins/info/1.0/",
             "summary": "Get plugin meta data.",
+            "class": "\\Wordpress\\Api\\Command",
             "responseClass": "\\Wordpress\\Api\\Response",
             "parameters": {
                 "action": {
                     "location": "postField",
                     "type": "string",
                     "required": true,
-                    "default": "plugin_information",
+                    "default": "query_themes",
                     "static": true
                 },
-                "request": {
-                    "location": "postField",
-                    "type": ["string", "object"],
+                "browse": {
+                    "type": "string",
                     "required": true,
-                    "filters": ["serialize"]
+                    "default": "new",
+                    "static": true
+                },
+                "search": {
+                    "type": "string",
+                    "required": false
+                },
+                "tag": {
+                    "type": "string",
+                    "required": false
+                },
+                "author": {
+                    "type": "string",
+                    "required": false
+                },
+                "page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 20
+                },
+                "fields": {
+                    "type": "array",
+                    "required": false,
+                    "default": {
+                        "downloaded": true,
+                        "author": true,
+                        "author_profile": false,
+                        "contributors": false,
+                        "requires": true,
+                        "tested": true,
+                        "compatibility": true,
+                        "homepage": false,
+                        "description": true,
+                        "last_updated": true,
+                        "added": true,
+                        "sections": false
+                    }
                 }
             }
         },
@@ -115,6 +499,62 @@
                     "required": true,
                     "default": "plugins",
                     "static": true
+                }
+            }
+        },
+        "SearchPlugins": {
+            "httpMethod": "POST",
+            "uri": "/plugins/info/1.0/",
+            "summary": "Get plugin meta data.",
+            "class": "\\Wordpress\\Api\\Command",
+            "responseClass": "\\Wordpress\\Api\\Response",
+            "parameters": {
+                "action": {
+                    "location": "postField",
+                    "type": "string",
+                    "required": true,
+                    "default": "query_plugins",
+                    "static": true
+                },
+                "search": {
+                    "type": "string",
+                    "required": true
+                },
+                "tag": {
+                    "type": "string",
+                    "required": false
+                },
+                "author": {
+                    "type": "string",
+                    "required": false
+                },
+                "page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "default": 20
+                },
+                "fields": {
+                    "type": "array",
+                    "required": false,
+                    "default": {
+                        "downloaded": true,
+                        "author": true,
+                        "author_profile": false,
+                        "contributors": false,
+                        "requires": true,
+                        "tested": true,
+                        "compatibility": true,
+                        "homepage": false,
+                        "description": true,
+                        "last_updated": true,
+                        "added": true,
+                        "sections": false
+                    }
                 }
             }
         }

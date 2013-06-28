@@ -4,7 +4,7 @@ This is a guzzle client written to interact with the [https://codex.wordpress.or
 
 # Example
 
-$client = \Wordpress\Api\WordpressClient::factory();
+    $client = \Wordpress\Api\WordpressClient::factory();
 
     // Get new plugins.
 

@@ -5,6 +5,20 @@ use Guzzle\Service\Command\OperationCommand;
 class VersionsCommand extends OperationCommand {
 
     /**
+     * Unset object properties when $this is destroyed.
+     *
+     * @return void
+     */
+    public function __destruct()
+    {
+        unset($this->request);
+        unset($this->result);
+        unset($this->client);
+        unset($this->operation);
+        unset($this->validator);
+    }
+
+    /**
      * Builds the url and creates request object.
      * 
      * @return void

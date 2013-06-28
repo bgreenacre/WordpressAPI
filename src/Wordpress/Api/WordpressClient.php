@@ -15,7 +15,12 @@ class WordpressClient extends Client {
     public static function factory($config = array())
     {
         $default = array(
-            'base_url'    => 'http://api.wordpress.org',
+            'base_url'     => 'http://api.wordpress.org',
+            'curl.options' => array(
+                CURLOPT_CONNECTTIMEOUT => 30,
+                CURLOPT_TIMEOUT => 120,
+                'body_as_string' => true,
+            ),
         );
 
         $required = array('base_url');

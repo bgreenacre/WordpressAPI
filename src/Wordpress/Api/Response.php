@@ -13,6 +13,16 @@ class Response implements ResponseClassInterface, \ArrayAccess {
     protected $data;
 
     /**
+     * Clear object properties when $this is destroyed.
+     *
+     * @return void
+     */
+    public function __destruct()
+    {
+        $this->data = null;
+    }
+
+    /**
      * Create an object to handle response from api.
      * 
      * @param  OperationCommand $command The guzzle command for the api.
@@ -20,13 +30,13 @@ class Response implements ResponseClassInterface, \ArrayAccess {
      */
     public static function fromCommand(OperationCommand $command)
     {
-        $data = unserialize(
+        $data = @unserialize(
             (string) $command
                 ->getResponse()
                 ->getBody()
         );
 
-        return new self($data);
+        return new self(json_decode(json_encode($data), true));
     }
 
     /**
@@ -34,9 +44,57 @@ class Response implements ResponseClassInterface, \ArrayAccess {
      * 
      * @param array $data Associative array of data.
      */
-    public function __construct($data)
+    public function __construct(array $data)
     {
-        $this->data = (array) $data;
+        $this->data = $data;
+    }
+
+    /**
+     * Get the current page.
+     * 
+     * @return integer
+     */
+    public function getCurrentPage()
+    {
+        return isset($this['info']['page'])
+            ? $this['info']['page']
+            : 1;
+    }
+
+    /**
+     * Get page count.
+     * 
+     * @return integer
+     */
+    public function getPageCount()
+    {
+        return isset($this['info']['pages'])
+            ? (int) $this['info']['pages']
+            : 0;
+    }
+
+    /**
+     * Get the total results count.
+     * 
+     * @return integer
+     */
+    public function getTotalResults()
+    {
+        return isset($this['info']['results'])
+            ? (int) $this['info']['results']
+            : 0;
+    }
+
+    /**
+     * Get the error message from the response object.
+     * 
+     * @return string
+     */
+    public function getError()
+    {
+        return isset($this['error'])
+            ? $this['error']
+            : null;
     }
 
     /**
