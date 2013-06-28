@@ -27,14 +27,22 @@ class VersionsCommand extends OperationCommand {
     {
         $this->client->setBaseUrl('http://wordpress.org');
 
-        $this->request = $this->client
-            ->get(
-                sprintf(
-                    '/extend/%s/%s/developers/',
-                    $this['package'],
-                    $this['slug']
-                )
-            );
+        if ($this['package'] == 'core')
+        {
+            $this->request = $this->client
+                ->get('/download/release-archive/');
+        }
+        else
+        {
+            $this->request = $this->client
+                ->get(
+                    sprintf(
+                        '/extend/%s/%s/developers/',
+                        $this['package'],
+                        $this['slug']
+                    )
+                );
+        }
     }
 
     /**
@@ -49,12 +57,24 @@ class VersionsCommand extends OperationCommand {
         $versions = array();
         $body = (string) $this->request->getResponse()->getBody();
 
-        // Find all url's containing zip files.
-        preg_match_all(
-            '#\<a(?:.*?)href=(?:\'|")+(.*?' . preg_quote($this['slug']) . '\.?([0-9\.]+)?\.zip)(?:\'|")+.*?\>#i',
-            $body,
-            $matches
-        );
+        if ($this['package'] == 'core')
+        {
+            // Find all url's containing zip files.
+            preg_match_all(
+                '#\<a(?:.*?)href=(?:\'|")+(.*?wordpress\-(.*?)\.zip)(?:\'|")+.*?\>#i',
+                $body,
+                $matches
+            );
+        }
+        else
+        {
+            // Find all url's containing zip files.
+            preg_match_all(
+                '#\<a(?:.*?)href=(?:\'|")+(.*?' . preg_quote($this['slug']) . '\.?([0-9\.]+)?\.zip)(?:\'|")+.*?\>#i',
+                $body,
+                $matches
+            );
+        }
 
         // Build an array of found versions
         if (isset($matches[1]))

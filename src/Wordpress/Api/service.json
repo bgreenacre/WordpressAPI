@@ -557,6 +557,18 @@
                     }
                 }
             }
+        },
+        "GetCoreVersions": {
+            "httpMethod": "GET",
+            "class": "\\Wordpress\\Api\\Command\\VersionsCommand",
+            "parameters": {
+                "package": {
+                    "type": "string",
+                    "required": true,
+                    "default": "core",
+                    "static": true
+                }
+            }
         }
     }
 }
