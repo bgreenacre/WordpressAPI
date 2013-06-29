@@ -1,6 +1,6 @@
 # Wordpress API Client.
 
-This is a guzzle client written to interact with the [https://codex.wordpress.org/WordPress.org_API](Wordpres API)
+This is a guzzle client written to interact with the [Wordpres API](https://codex.wordpress.org/WordPress.org_API)
 
 # Example
 
