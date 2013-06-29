@@ -36,7 +36,7 @@ class Response implements ResponseClassInterface, \ArrayAccess {
                 ->getBody()
         );
 
-        return new self(json_decode(json_encode($data), true));
+        return new self(@json_decode(@json_encode($data), true));
     }
 
     /**
