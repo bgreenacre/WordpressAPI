@@ -1,4 +1,4 @@
-<?php namespace Shc\Api\Model;
+<?php namespace Wordpress\Api\Model;
 
 use Guzzle\Service\Resource\ResourceIterator;
 
@@ -15,11 +15,18 @@ class WordpressResultIterator extends ResourceIterator {
 
         $this->nextToken = $result->getCurrentPage() + 1;
 
-        return isset($result['themes'])
-            ? $result['themes']
-            : isset($result['plugins'])
-                ? $result['plugins']
-                : array();
+        if (isset($result['themes']))
+        {
+            return $result['themes'];
+        }
+        elseif (isset($result['plugins']))
+        {
+            return $result['plugins'];
+        }
+        else
+        {
+            return array();
+        }
     }
 
 }

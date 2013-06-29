@@ -43,6 +43,8 @@ class VersionsCommand extends OperationCommand {
                     )
                 );
         }
+
+        $this->client->setBaseUrl('http://api.wordpress.org');
     }
 
     /**
