@@ -199,7 +199,11 @@
                         "description": true,
                         "last_updated": true,
                         "added": true,
-                        "sections": false
+                        "sections": false,
+                        "rating": true,
+                        "num_rating": true,
+                        "downloads": true,
+                        "tags": true
                     }
                 }
             }
@@ -485,7 +489,11 @@
                         "description": true,
                         "last_updated": true,
                         "added": true,
-                        "sections": false
+                        "sections": false,
+                        "rating": true,
+                        "num_rating": true,
+                        "downloads": true,
+                        "tags": true
                     }
                 }
             }

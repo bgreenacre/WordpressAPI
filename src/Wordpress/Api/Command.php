@@ -15,6 +15,8 @@ class Command extends OperationCommand {
         'search',
         'tag',
         'author',
+        'slug',
+        'version',
     );
 
     /**
