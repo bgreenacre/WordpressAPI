@@ -28,4 +28,4 @@ This is a guzzle client written to interact with the [Wordpres API](https://code
 
     var_dump($plugin);
 
-_See src/Wordpress/Api/services.json for all available operations_
+_See src/Wordpress/Api/service.json for all available operations_

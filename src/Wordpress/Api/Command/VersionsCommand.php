@@ -25,15 +25,19 @@ class VersionsCommand extends OperationCommand {
      */
     public function build()
     {
+        // Set the base url.
         $this->client->setBaseUrl('http://wordpress.org');
 
         if ($this['package'] == 'core')
         {
+            // Core is a specific uri.
             $this->request = $this->client
                 ->get('/download/release-archive/');
         }
         else
         {
+            // Create the uri dynamically based on
+            // parameters sent to command.
             $this->request = $this->client
                 ->get(
                     sprintf(
@@ -44,6 +48,8 @@ class VersionsCommand extends OperationCommand {
                 );
         }
 
+        // Reset base url in case the same client object
+        // is used for future commands.
         $this->client->setBaseUrl('http://api.wordpress.org');
     }
 

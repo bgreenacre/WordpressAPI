@@ -4,6 +4,12 @@ use Guzzle\Service\Resource\ResourceIterator;
 
 class WordpressResultIterator extends ResourceIterator {
 
+    /**
+     * Build new command and execute with pagination
+     * tokens.
+     * 
+     * @return array Array of result resources.
+     */
     protected function sendRequest()
     {
         if ( ! is_null($this->nextToken))
@@ -13,6 +19,7 @@ class WordpressResultIterator extends ResourceIterator {
 
         $result = $this->command->execute();
 
+        // Increment page.
         $this->nextToken = $result->getCurrentPage() + 1;
 
         if (isset($result['themes']))
