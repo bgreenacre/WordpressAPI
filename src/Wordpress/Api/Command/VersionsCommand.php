@@ -82,7 +82,7 @@ class VersionsCommand extends OperationCommand {
         {
             // Find all url's containing zip files.
             preg_match_all(
-                '#\<a(?:.*?)href=(?:\'|")+(.*?' . preg_quote($this['slug']) . '\.?([0-9\.]+)?\.zip)(?:\'|")+.*?\>#i',
+                '#href=(?:\'|"){1}(.*?' . preg_quote($this['slug']) . '\.?([0-9\.]+)?\.zip)(?:\'|"){1}#i',
                 $body,
                 $matches
             );

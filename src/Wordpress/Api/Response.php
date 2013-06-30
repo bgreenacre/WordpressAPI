@@ -36,7 +36,12 @@ class Response implements ResponseClassInterface, \ArrayAccess {
                 ->getBody()
         );
 
-        return new self(@json_decode(@json_encode($data), true));
+        if (is_null($data))
+        {
+            $data = array();
+        }
+
+        return new self( (array) $data);
     }
 
     /**
@@ -117,7 +122,7 @@ class Response implements ResponseClassInterface, \ArrayAccess {
     public function offsetGet($key)
     {
         return (array_key_exists($key, $this->data))
-            ? $this->data[$key]
+            ? (array) $this->data[$key]
             : null;
     }
 
